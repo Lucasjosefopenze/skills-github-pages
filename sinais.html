@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de Sinais Aviator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .container {
+      background-color: #1c1c1c;
+      border-radius: 15px;
+      padding: 25px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #00ff99;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .resultado, .historico {
+      margin-top: 20px;
+    }
+
+    .sinal {
+      background-color: #2a2a2a;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 10px;
+      color: #00ff99;
+      font-weight: bold;
+    }
+
+    .sinal small {
+      color: #aaa;
+      display: block;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Gerador de Sinais AVIATOR</h2>
+
+    <label for="casa">Selecione a casa de apostas:</label>
+    <select id="casa">
+      <option value="Placard Bet">Placard Bet</option>
+      <option value="Mega Gamelive">Mega Gamelive</option>
+      <option value="Olá Bet">Olá Bet</option>
+      <option value="Bet Vivo">Bet Vivo</option>
+    </select>
+
+    <button onclick="gerarSinal()">Gerar Sinal</button>
+
+    <div class="resultado" id="resultado"></div>
+
+    <div class="historico" id="historico">
+      <h3>Histórico de Sinais</h3>
+    </div>
+  </div>
+
+  <script>
+    function gerarSinal() {
+      const casa = document.getElementById("casa").value;
+      const multiplicador = (Math.random() * 6 + 1).toFixed(2); // de 1.00x a 7.00x
+      const agora = new Date();
+      const hora = agora.toLocaleTimeString('pt-PT');
+
+      const sinalHTML = `
+        <div class="sinal">
+          ${multiplicador}x - ${casa}
+          <small>${hora}</small>
+        </div>
+      `;
+
+      document.getElementById("resultado").innerHTML = sinalHTML;
+
+      // Adiciona ao histórico
+      const historico = document.getElementById("historico");
+      historico.insertAdjacentHTML("beforeend", sinalHTML);
+    }
+  </script>
+
+</body>
+</html>
